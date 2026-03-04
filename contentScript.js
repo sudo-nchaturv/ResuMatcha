@@ -33,6 +33,32 @@
     return cleanText(document.body?.innerText || '').slice(0, 30000);
   }
 
+  function extractJobTitle() {
+    const titleSelectors = ['h1', '.job-title', '.jobTitle', '[data-testid*="jobTitle" i]'];
+    for (const selector of titleSelectors) {
+      const el = document.querySelector(selector);
+      if (el && el.innerText.trim()) {
+        return cleanText(el.innerText);
+      }
+    }
+    return '';
+  }
+
+  function extractCompany() {
+    const companySelectors = ['.company', '.employer', '[data-testid*="company" i]'];
+    for (const selector of companySelectors) {
+      const el = document.querySelector(selector);
+      if (el && el.innerText.trim()) {
+        return cleanText(el.innerText);
+      }
+    }
+    return '';
+  }
+
   const text = extractJobDescription();
-  chrome.runtime.sendMessage({ type: 'JD_EXTRACTED', text, sourceUrl: location.href });
+  chrome.runtime.sendMessage({
+    type: 'JD_EXTRACTED',
+    text,
+    sourceUrl: location.href
+  });
 })();

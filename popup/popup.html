@@ -1,46 +1,104 @@
 <!doctype html>
 <html>
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ResumeMatcher</title>
+  <title>ResuMatcha</title>
   <link rel="stylesheet" href="popup.css" />
 </head>
+
 <body>
-  <main class="app">
-    <h1>ResumeMatcher</h1>
-    <p id="jdStatus">Extracting JD…</p>
 
-    <label class="file-label">Upload CV (.txt)
-      <input id="cvInput" type="file" accept=".txt,text/plain" />
-    </label>
+  <!-- ── SETTINGS SCREEN ───────────────────────────────── -->
+  <div id="settingsScreen" class="screen hidden">
+    <div class="hdr">
+      <h1>⚙ Setup</h1>
+      <p class="sub">Configure your LLM provider to use ResuMatcha.</p>
+    </div>
+    <label>Provider</label>
+    <select id="s-provider">
+      <option value="gemini">Gemini</option>
+      <option value="openrouter">OpenRouter / OpenAI-style</option>
+    </select>
+    <label>Model</label>
+    <input id="s-model" type="text" placeholder="gemini-1.5-flash" />
+    <label>API Key</label>
+    <input id="s-apiKey" type="password" placeholder="Paste your key here…" />
+    <div id="s-endpointRow">
+      <label>Endpoint</label>
+      <input id="s-endpoint" type="text" placeholder="https://api.openrouter.ai/v1/chat/completions" />
+    </div>
+    <button id="s-saveBtn">Verify &amp; Save</button>
+    <p id="s-status" class="msg"></p>
+    <p class="hint">Key is stored locally in this browser profile only.</p>
+  </div>
 
-    <div class="row">
-      <input id="jobTitle" placeholder="Job title" />
-      <input id="company" placeholder="Company" />
+  <!-- ── MAIN SCREEN ───────────────────────────────────── -->
+  <div id="mainScreen" class="screen hidden">
+    <div class="hdr row-between">
+      <h1>ResuMatcha</h1>
+      <button id="mainSettingsBtn" class="icon-btn" title="Settings">⚙</button>
     </div>
 
-    <button id="analyzeBtn">Analyze Match</button>
-    <button id="coverBtn">Generate Cover Letter</button>
+    <div class="card">
+      <div class="card-lbl">Your CV</div>
+      <p id="cvStatus" class="muted small">No CV uploaded yet</p>
+      <label class="file-btn">
+        📄 Upload / Replace CV (.txt)
+        <input id="cvInput" type="file" accept=".txt,text/plain" />
+      </label>
+    </div>
 
-    <section>
-      <h2>Scores</h2>
-      <p id="scoreLine">No analysis yet.</p>
-    </section>
+    <div class="card">
+      <div class="card-lbl">Current Page</div>
+      <p id="currentUrl" class="url-text small">—</p>
+    </div>
 
-    <section>
-      <h2>Missing Keywords</h2>
-      <ul id="missingList"></ul>
-    </section>
+    <button id="extractBtn" disabled>Extract JD &amp; Analyze with AI</button>
+    <p id="extractStatus" class="msg"></p>
+  </div>
 
-    <section>
-      <h2>Cover Letter</h2>
-      <textarea id="letter" rows="6" placeholder="Generated letter appears here..."></textarea>
+  <!-- ── RESULTS SCREEN ────────────────────────────────── -->
+  <div id="resultsScreen" class="screen hidden">
+    <div class="hdr row-between">
+      <button id="backBtn" class="icon-btn">←</button>
+      <h1>Analysis</h1>
+      <button id="resSettingsBtn" class="icon-btn" title="Settings">⚙</button>
+    </div>
+
+    <div class="job-card">
+      <div id="resJobTitle" class="job-title">—</div>
+      <div id="resCompany" class="job-co"></div>
+      <p id="resUrl" class="url-text small"></p>
+    </div>
+
+    <div class="scores-row">
+      <div class="score-box">
+        <span id="atsVal" class="score-num">—</span>
+        <span class="score-lbl">ATS Score</span>
+      </div>
+      <div class="score-box">
+        <span id="kwVal" class="score-num">—</span>
+        <span class="score-lbl">Keyword Match</span>
+      </div>
+    </div>
+
+    <p id="matchSummary" class="summary"></p>
+
+    <div class="card">
+      <div class="card-lbl">Missing Keywords</div>
+      <div id="kwChips" class="chips"></div>
+    </div>
+
+    <button id="coverBtn">✉ Generate Cover Letter</button>
+    <div id="coverSection" class="hidden">
+      <textarea id="letter" rows="5" placeholder="Generated cover letter…"></textarea>
       <button id="copyBtn">Copy</button>
-    </section>
+    </div>
+    <p id="coverStatus" class="msg"></p>
+  </div>
 
-    <a href="../settings/settings.html" target="_blank">Settings</a>
-  </main>
   <script type="module" src="popup.js"></script>
 </body>
+
 </html>

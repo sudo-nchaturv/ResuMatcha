@@ -1,48 +1,268 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0f172a;
-  color: #e2e8f0;
-}
-
-.app {
-  width: 360px;
-  padding: 12px;
-}
-
-h1 { font-size: 18px; margin: 0 0 8px; }
-h2 { font-size: 14px; margin-bottom: 4px; }
-
-.row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-
-input, textarea, button {
-  width: 100%;
-  margin: 6px 0;
-  padding: 8px;
-  border-radius: 8px;
-  border: 1px solid #334155;
+/* ── Base ──────────────────────────────────────────────── */
+* {
   box-sizing: border-box;
 }
 
-button {
-  background: #2563eb;
-  color: #fff;
-  border: none;
-  cursor: pointer;
+body {
+  margin: 0;
+  font-family: -apple-system, Arial, sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+  font-size: 13px;
 }
 
-.file-label {
+.screen {
+  width: 360px;
+  padding: 14px;
+  max-height: 580px;
+  overflow-y: auto;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ── Header ────────────────────────────────────────────── */
+.hdr {
+  margin-bottom: 10px;
+}
+
+.hdr h1 {
+  font-size: 17px;
+  margin: 0 0 2px;
+}
+
+.hdr .sub {
+  font-size: 11px;
+  color: #64748b;
+  margin: 0;
+}
+
+.row-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ── Labels & inputs ───────────────────────────────────── */
+label {
   display: block;
+  font-size: 11px;
+  color: #94a3b8;
+  margin: 10px 0 3px;
+}
+
+input[type="text"],
+input[type="password"],
+select,
+textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 7px;
+  border: 1px solid #2d3f55;
   background: #1e293b;
-  padding: 8px;
+  color: #e2e8f0;
+  font-size: 13px;
+  outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #3b82f6;
+}
+
+textarea {
+  resize: vertical;
+  margin-top: 6px;
+}
+
+/* ── Buttons ───────────────────────────────────────────── */
+button {
+  display: block;
+  width: 100%;
+  padding: 9px 12px;
+  margin-top: 10px;
+  border-radius: 7px;
+  border: none;
+  background: #2563eb;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+button:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+button:disabled {
+  background: #1e293b;
+  color: #475569;
+  cursor: not-allowed;
+}
+
+.icon-btn {
+  width: auto;
+  padding: 4px 9px;
+  background: #1e293b;
+  border: 1px solid #2d3f55;
+  font-size: 14px;
+  font-weight: normal;
+  margin: 0;
+  border-radius: 6px;
+}
+
+/* ── Cards ─────────────────────────────────────────────── */
+.card {
+  background: #1e293b;
+  border: 1px solid #2d3f55;
   border-radius: 8px;
+  padding: 10px 12px;
   margin: 8px 0;
 }
 
-#missingList {
-  max-height: 90px;
-  overflow: auto;
-  padding-left: 18px;
+.card-lbl {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
 }
 
-a { color: #93c5fd; }
+/* ── CV file upload button ──────────────────────────────── */
+.file-btn {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px dashed #3b82f6;
+  background: transparent;
+  color: #93c5fd;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.file-btn input[type="file"] {
+  display: none;
+}
+
+/* ── Text helpers ──────────────────────────────────────── */
+.muted {
+  color: #64748b;
+}
+
+.small {
+  font-size: 11px;
+}
+
+.url-text {
+  word-break: break-all;
+  color: #475569;
+  margin: 2px 0;
+}
+
+.hint {
+  font-size: 11px;
+  color: #475569;
+  margin-top: 8px;
+}
+
+/* ── Status messages ───────────────────────────────────── */
+.msg {
+  font-size: 12px;
+  margin: 6px 0 0;
+  min-height: 16px;
+}
+
+.ok {
+  color: #22c55e;
+}
+
+.err {
+  color: #ef4444;
+}
+
+.inf {
+  color: #94a3b8;
+}
+
+/* ── Job card (results) ────────────────────────────────── */
+.job-card {
+  background: #1e293b;
+  border: 1px solid #2d3f55;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin: 0 0 8px;
+}
+
+.job-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.job-co {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* ── Scores ────────────────────────────────────────────── */
+.scores-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 0 0 8px;
+}
+
+.score-box {
+  background: #1e293b;
+  border: 1px solid #2d3f55;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.score-num {
+  font-size: 26px;
+  font-weight: 800;
+  color: #3b82f6;
+}
+
+.score-lbl {
+  font-size: 10px;
+  color: #64748b;
+  margin-top: 2px;
+  text-transform: uppercase;
+}
+
+/* ── Summary ────────────────────────────────────────────── */
+.summary {
+  font-size: 12px;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin: 0 0 8px;
+  font-style: italic;
+}
+
+/* ── Keyword chips ──────────────────────────────────────── */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.chip {
+  background: #0f3460;
+  border: 1px solid #1d4ed8;
+  color: #93c5fd;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 99px;
+}
