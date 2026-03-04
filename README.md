@@ -1,4 +1,6 @@
 # ResuMatcha
+<img width="128" height="128" alt="icon128" src="https://github.com/user-attachments/assets/ee822176-b686-4aa7-b3bf-2ca143f2165d" />
+
 
 ResuMatcha is a Chrome Extension (Manifest V3) that:
 - extracts job descriptions from the active tab,
