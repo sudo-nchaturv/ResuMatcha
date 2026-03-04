@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ResumeMatcher</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <main class="app">
+    <h1>ResumeMatcher</h1>
+    <p id="jdStatus">Extracting JD…</p>
+
+    <label class="file-label">Upload CV (.txt)
+      <input id="cvInput" type="file" accept=".txt,text/plain" />
+    </label>
+
+    <div class="row">
+      <input id="jobTitle" placeholder="Job title" />
+      <input id="company" placeholder="Company" />
+    </div>
+
+    <button id="analyzeBtn">Analyze Match</button>
+    <button id="coverBtn">Generate Cover Letter</button>
+
+    <section>
+      <h2>Scores</h2>
+      <p id="scoreLine">No analysis yet.</p>
+    </section>
+
+    <section>
+      <h2>Missing Keywords</h2>
+      <ul id="missingList"></ul>
+    </section>
+
+    <section>
+      <h2>Cover Letter</h2>
+      <textarea id="letter" rows="6" placeholder="Generated letter appears here..."></textarea>
+      <button id="copyBtn">Copy</button>
+    </section>
+
+    <a href="../settings/settings.html" target="_blank">Settings</a>
+  </main>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
