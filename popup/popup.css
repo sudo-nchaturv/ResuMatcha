@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+.app {
+  width: 360px;
+  padding: 12px;
+}
+
+h1 { font-size: 18px; margin: 0 0 8px; }
+h2 { font-size: 14px; margin-bottom: 4px; }
+
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+input, textarea, button {
+  width: 100%;
+  margin: 6px 0;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  box-sizing: border-box;
+}
+
+button {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.file-label {
+  display: block;
+  background: #1e293b;
+  padding: 8px;
+  border-radius: 8px;
+  margin: 8px 0;
+}
+
+#missingList {
+  max-height: 90px;
+  overflow: auto;
+  padding-left: 18px;
+}
+
+a { color: #93c5fd; }
