@@ -1,6 +1,6 @@
 # ResuMatcha
 
-ResumeMatcha is a Chrome Extension (Manifest V3) that:
+ResuMatcha is a Chrome Extension (Manifest V3) that:
 - extracts job descriptions from the active tab,
 - compares it against an uploaded CV,
 - computes keyword match + ATS-style score,
